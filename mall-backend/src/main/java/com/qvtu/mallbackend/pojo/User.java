@@ -1,5 +1,6 @@
 package com.qvtu.mallbackend.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,6 +12,8 @@ public class User {
 
     private String username;
 
+    @JsonIgnore
+    // JsonIgnore注解让Springmvc把当前对象转换为json字符串时忽略这个值
     private String password;
 
     private String nickname;

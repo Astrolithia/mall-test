@@ -1,13 +1,20 @@
 package com.qvtu.mallbackend.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.qvtu.mallbackend.mapper.OrderMapper;
 import com.qvtu.mallbackend.pojo.Order;
+import com.qvtu.mallbackend.pojo.PageBean;
 import com.qvtu.mallbackend.service.OrderService;
+import com.qvtu.mallbackend.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,4 +33,19 @@ public class OrderServiceImpl implements OrderService {
         // 调用 Mapper 插入订单
         orderMapper.insertOrder(order);
     }
+
+    @Override
+    public PageBean<Order> list(Integer pageNum, Integer pageSize) {
+        PageBean<Order> pb = new PageBean<>();
+        PageHelper.startPage(pageNum, pageSize);
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+        List<Order> ps = orderMapper.list(userId);
+        Page<Order> p = (Page<Order>) ps;
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
+    }
+
+
 }

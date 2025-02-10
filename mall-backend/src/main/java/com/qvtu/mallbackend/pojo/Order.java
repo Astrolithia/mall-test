@@ -17,4 +17,5 @@ public class Order {
     private LocalDateTime shippingTime; // 配送时间
     private LocalDateTime createTime; // 创建时间
     private LocalDateTime updateTime; // 修改时间
+
 }

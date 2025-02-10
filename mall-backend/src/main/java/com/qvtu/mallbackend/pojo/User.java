@@ -5,9 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-import lombok.NonNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class User {
@@ -30,13 +29,13 @@ public class User {
 
     private String phone;
 
-    private Date registrationTime;
+    private LocalDateTime registrationTime;
 
     private String status;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     private Integer createUser;
 

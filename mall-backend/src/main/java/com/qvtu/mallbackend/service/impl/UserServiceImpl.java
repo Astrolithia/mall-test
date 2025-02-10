@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
         // 添加
         userMapper.add(username, md5String, email, phone);
     }
+
+    @Override
+    public void update(User user) {
+        userMapper.update(user);
+    }
 }

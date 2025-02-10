@@ -4,8 +4,12 @@ import com.qvtu.mallbackend.mapper.UserMapper;
 import com.qvtu.mallbackend.pojo.User;
 import com.qvtu.mallbackend.service.UserService;
 import com.qvtu.mallbackend.utils.Md5Util;
+import com.qvtu.mallbackend.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // 将服务注册到容器中
 @Service
@@ -31,5 +35,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         userMapper.update(user);
+    }
+
+    @Override
+    public void updateAvatar(String avatarUrl, Integer userId) {
+//        Map<String, Object> map = ThreadLocalUtil.get();
+//        Integer userId = (Integer) map.get("user_id");
+        userMapper.updateAvatar(avatarUrl, userId);
     }
 }

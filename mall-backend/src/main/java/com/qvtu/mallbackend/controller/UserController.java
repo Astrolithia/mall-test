@@ -6,6 +6,7 @@ import com.qvtu.mallbackend.service.UserService;
 import com.qvtu.mallbackend.utils.JwtUtil;
 import com.qvtu.mallbackend.utils.Md5Util;
 import com.qvtu.mallbackend.utils.ThreadLocalUtil;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -73,8 +74,29 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody User user) {
+    public Result update(@Valid @RequestBody User user) {
         userService.update(user);
+        return Result.success();
+    }
+
+    @PatchMapping("/updateAvatar")
+    public Result updateAvatar(@RequestParam String avatarUrl) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+        userService.updateAvatar(avatarUrl, userId);
+        return Result.success();
+    }
+
+    @PatchMapping("/updatePwd")
+    public Result updatePwd(@RequestBody Map<String, String> params) {
+        // 1. 校验参数
+        String oldPwd = params.get("old_pwd");
+        String newPwd = params.get("new_pwd");
+        String rePwd = params.get("re_pwd");
+
+        if (oldPwd == null || newPwd == null || rePwd == null) {
+            return Result.error("缺少必要的参数");
+        }
         return Result.success();
     }
 }

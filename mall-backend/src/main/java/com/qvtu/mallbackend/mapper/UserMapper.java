@@ -21,4 +21,8 @@ public interface UserMapper {
     // 更新
     @Update("update user set username=#{username}, nickname=#{nickname}, email=#{email}, phone=#{phone}, update_time=now() where user_id=#{userId}")
     void update(User user);
+
+    // 更新用户头像
+    @Update("update user set avatar_url=#{avatarUrl} where user_id=#{userId}")
+    void updateAvatar(String avatarUrl, Integer userId);
 }

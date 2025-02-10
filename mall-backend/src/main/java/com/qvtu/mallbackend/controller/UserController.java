@@ -97,6 +97,26 @@ public class UserController {
         if (oldPwd == null || newPwd == null || rePwd == null) {
             return Result.error("缺少必要的参数");
         }
+
+        // 原密码是否正确
+        // 调用userService根据用户名拿到原密码，再和old_pwd比对
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+        User loginUser = userService.findByUserName(username);
+        if (loginUser == null) {
+            return Result.error("用户不存在");
+        }
+        if (!Md5Util.getMD5String(oldPwd).equals(loginUser.getPassword())) {
+            return Result.error("原密码错误");
+        }
+
+        // 2. 判断新密码和确认密码是否一致
+        if (!newPwd.equals(rePwd)) {
+            return Result.error("新密码和确认密码不一致");
+        }
+
+        // 3. 更新密码
+        userService.updatePwd(newPwd);
         return Result.success();
     }
 }

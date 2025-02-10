@@ -5,3 +5,6 @@ spring:
     username: root
     password: Paramecium88.
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

@@ -20,9 +20,15 @@ public class OrderController {
         return Result.success("订单提交成功");
     }
 
-    @GetMapping
-    public Result<PageBean<Order>> list(Integer pageNum, Integer pageSize) {
-        PageBean<Order> pb = orderService.list(pageNum, pageSize);
+    @GetMapping("/list")
+    public Result<PageBean<Order>> list(Integer pageNum, Integer pageSize, String orderStatus) {
+        PageBean<Order> pb = orderService.list(pageNum, pageSize, orderStatus);
         return Result.success(pb);
+    }
+
+    @GetMapping("/detail")
+    public Result<Order> detail(@RequestParam Integer orderId) {
+        Order o = orderService.findById(orderId);
+        return Result.success(o);
     }
 }

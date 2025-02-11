@@ -3,6 +3,7 @@ package com.qvtu.mallbackend.mapper;
 import com.qvtu.mallbackend.pojo.Order;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface OrderMapper {
             "VALUES (#{userId}, #{merchantId}, #{orderStatus}, #{paymentStatus}, #{paymentTime}, #{orderTotal}, #{shippingStatus}, #{shippingTime})")
     void insertOrder(Order order);
 
-    @Select("SELECT * FROM `order`")
-    List<Order> list(Integer userId);
+    List<Order> list(@Param("userId") Integer userId, @Param("orderStatus") String orderStatus);
+
+    @Select("SELECT * FROM `Order` WHERE order_id=#{orderId}")
+    Order findById(Integer orderId);
 }

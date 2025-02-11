@@ -6,5 +6,7 @@ import com.qvtu.mallbackend.pojo.PageBean;
 public interface OrderService {
     void submitOrder(Order order);
 
-    PageBean<Order> list(Integer pageNum, Integer pageSize);
+    PageBean<Order> list(Integer pageNum, Integer pageSize, String orderStatus);
+
+    Order findById(Integer orderId);
 }

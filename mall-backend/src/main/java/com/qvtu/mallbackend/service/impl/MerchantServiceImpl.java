@@ -52,4 +52,9 @@ public class MerchantServiceImpl implements MerchantService {
         merchant.setUpdateTime(LocalDateTime.now());
         merchantMapper.update(merchant);
     }
+
+    @Override
+    public void delete(Integer merchantId) {
+        merchantMapper.delete(merchantId);
+    }
 }

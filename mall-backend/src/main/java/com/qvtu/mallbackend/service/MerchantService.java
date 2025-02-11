@@ -11,4 +11,6 @@ public interface MerchantService {
     Merchant findById(Integer merchantId);
 
     void update(Merchant merchant);
+
+    void delete(Integer merchantId);
 }

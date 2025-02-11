@@ -26,9 +26,13 @@ public interface MerchantMapper {
     Long count(String storeStatus, String merchantType);
 
     // 查询商家详情
-    @Select("SELECT * FROM Merchant WHERE merchant_id=#{merchantId}")
+    @Select("SELECT * FROM `Merchant` WHERE merchant_id=#{merchantId}")
     Merchant findById(Integer merchantId);
 
     // 更新商家信息
     void update(Merchant merchant);
+
+    // 删除商家
+    @Delete("DELETE FROM `Merchant` WHERE merchant_id=#{merchantId}")
+    void delete(Integer merchantId);
 }

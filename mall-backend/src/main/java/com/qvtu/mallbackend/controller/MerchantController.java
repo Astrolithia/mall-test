@@ -44,4 +44,10 @@ public class MerchantController {
         merchantService.update(merchant);
         return Result.success("更新商家信息成功");
     }
+
+    @DeleteMapping("/delete")
+    public Result delete(@RequestParam Integer merchantId) {
+        merchantService.delete(merchantId);
+        return Result.success("删除商家");
+    }
 }

@@ -1,10 +1,7 @@
 package com.qvtu.mallbackend.mapper;
 
 import com.qvtu.mallbackend.pojo.Order;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,4 +15,6 @@ public interface OrderMapper {
 
     @Select("SELECT * FROM `Order` WHERE order_id=#{orderId}")
     Order findById(Integer orderId);
+
+    void update(Order order);
 }

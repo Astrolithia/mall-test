@@ -9,4 +9,6 @@ public interface OrderService {
     PageBean<Order> list(Integer pageNum, Integer pageSize, String orderStatus);
 
     Order findById(Integer orderId);
+
+    void update(Order order);
 }

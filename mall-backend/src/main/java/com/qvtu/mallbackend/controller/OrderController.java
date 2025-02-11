@@ -5,6 +5,7 @@ import com.qvtu.mallbackend.pojo.PageBean;
 import com.qvtu.mallbackend.pojo.Result;
 import com.qvtu.mallbackend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,5 +31,11 @@ public class OrderController {
     public Result<Order> detail(@RequestParam Integer orderId) {
         Order o = orderService.findById(orderId);
         return Result.success(o);
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody @Validated Order order) {
+        orderService.update(order);
+        return Result.success("订单更新成功");
     }
 }

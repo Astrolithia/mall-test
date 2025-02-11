@@ -15,4 +15,18 @@
         </where>
     </select>
 
+    <update id="update" parameterType="com.qvtu.mallbackend.pojo.Order">
+        UPDATE `order`
+        <set>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="paymentStatus != null">payment_status = #{paymentStatus},</if>
+            <if test="paymentTime != null">payment_time = #{paymentTime},</if>
+            <if test="orderTotal != null">order_total = #{orderTotal},</if>
+            <if test="shippingStatus != null">shipping_status = #{shippingStatus},</if>
+            <if test="shippingTime != null">shipping_time = #{shippingTime},</if>
+            update_time = NOW()
+        </set>
+        WHERE order_id = #{orderId}
+    </update>
+
 </mapper>

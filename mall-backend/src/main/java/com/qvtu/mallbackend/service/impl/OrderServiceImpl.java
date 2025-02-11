@@ -52,5 +52,12 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.findById(orderId);
     }
 
+    @Override
+    public void update(Order order) {
+        // 补充属性值
+        order.setUpdateTime(LocalDateTime.now());
+        orderMapper.update(order);
+    }
+
 
 }

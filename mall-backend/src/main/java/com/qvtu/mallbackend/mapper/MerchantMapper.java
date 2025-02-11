@@ -3,6 +3,9 @@ package com.qvtu.mallbackend.mapper;
 import com.qvtu.mallbackend.pojo.Merchant;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface MerchantMapper {
@@ -14,4 +17,13 @@ public interface MerchantMapper {
             "#{storeStatus}, #{merchantType}, #{registrationTime}, #{auditStatus}, #{auditTime}, #{refuseReason}, " +
             "#{createUser}, #{updateUser}, #{createTime}, #{updateTime})")
     void add(Merchant merchant);
+
+    // 分页查询商家列表
+    List<Merchant> list(@Param("offset") Integer offset,
+                        @Param("pageSize") Integer pageSize,
+                        @Param("storeStatus") String storeStatus,
+                        @Param("merchantType") String merchantType);
+
+    // 查询商家总数
+    Long count(String storeStatus, String merchantType);
 }

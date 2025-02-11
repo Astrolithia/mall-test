@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qvtu.mallbackend.mapper.MerchantMapper">
+
+    <!-- 分页查询商家列表 -->
+    <select id="list" resultType="com.qvtu.mallbackend.pojo.Merchant">
+        SELECT *
+        FROM `merchant`
+        <where>
+            <if test="storeStatus != null and storeStatus != ''">
+                AND store_status = #{storeStatus}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                AND merchant_type = #{merchantType}
+            </if>
+        </where>
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <!-- 查询商家总数 -->
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM `merchant`
+        <where>
+            <if test="storeStatus != null and storeStatus != ''">
+                AND store_status = #{storeStatus}
+            </if>
+            <if test="merchantType != null and merchantType != ''">
+                AND merchant_type = #{merchantType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

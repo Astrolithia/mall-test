@@ -30,4 +30,10 @@ public class MerchantController {
         PageBean<Merchant> pb = merchantService.list(pageNum, pageSize, storeStatus, merchantType);
         return Result.success(pb);
     }
+
+    @GetMapping("/detail")
+    public Result<Merchant> detail(@RequestParam Integer merchantId) {
+        Merchant m = merchantService.findById(merchantId);
+        return Result.success(m);
+    }
 }

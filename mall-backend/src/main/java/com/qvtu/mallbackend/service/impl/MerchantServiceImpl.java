@@ -39,4 +39,9 @@ public class MerchantServiceImpl implements MerchantService {
         pb.setItems(merchants);
         return pb;
     }
+
+    @Override
+    public Merchant findById(Integer merchantId) {
+        return merchantMapper.findById(merchantId);
+    }
 }

@@ -7,4 +7,6 @@ public interface MerchantService {
     void add(Merchant merchant);
 
     PageBean<Merchant> list(Integer pageNum, Integer pageSize, String storeStatus, String merchantType);
+
+    Merchant findById(Integer merchantId);
 }

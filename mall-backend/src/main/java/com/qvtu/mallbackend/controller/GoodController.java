@@ -44,4 +44,10 @@ public class GoodController {
         goodService.update(good);
         return Result.success("商品信息更新成功");
     }
+
+    @DeleteMapping("/delete")
+    public Result delete(@RequestParam Integer goodsId) {
+        goodService.delete(goodsId);
+        return Result.success("商品删除成功");
+    }
 }

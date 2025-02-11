@@ -11,4 +11,6 @@ public interface GoodService {
     Good findById(Integer goodsId);
 
     void update(Good good);
+
+    void delete(Integer goodsId);
 }

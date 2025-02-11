@@ -1,6 +1,7 @@
 package com.qvtu.mallbackend.mapper;
 
 import com.qvtu.mallbackend.pojo.Good;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -33,5 +34,10 @@ public interface GoodMapper {
     @Select("SELECT * FROM Good WHERE goods_id=#{goodsId}")
     Good findById(Integer goodsId);
 
+    // 更新商品信息
     void update(Good good);
+
+    // 删除商品
+    @Delete("DELETE FROM Good WHERE goods_id=#{goodsId}")
+    void delete(Integer goodsId);
 }

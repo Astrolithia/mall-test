@@ -62,4 +62,9 @@ public class GoodServiceImpl implements GoodService {
     public void update(Good good) {
         goodMapper.update(good);
     }
+
+    @Override
+    public void delete(Integer goodsId) {
+        goodMapper.delete(goodsId);
+    }
 }

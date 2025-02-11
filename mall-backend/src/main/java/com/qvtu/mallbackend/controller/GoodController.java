@@ -31,4 +31,10 @@ public class GoodController {
         PageBean<Good> pb = goodService.list(pageNum, pageSize, title, categoryId, aliveStatus, auditStatus);
         return Result.success(pb);
     }
+
+    @GetMapping("/detail")
+    public Result<Good> detail(@RequestParam Integer goodsId) {
+        Good g = goodService.findById(goodsId);
+        return Result.success(g);
+    }
 }

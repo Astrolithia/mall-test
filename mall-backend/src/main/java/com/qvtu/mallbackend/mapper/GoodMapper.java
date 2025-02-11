@@ -3,6 +3,7 @@ package com.qvtu.mallbackend.mapper;
 import com.qvtu.mallbackend.pojo.Good;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -27,4 +28,8 @@ public interface GoodMapper {
 
     // 查询商品总数
     Long count(String title, Integer categoryId, String aliveStatus, String auditStatus);
+
+    // 根据Id查询商品详情
+    @Select("SELECT * FROM Good WHERE goods_id=#{goodsId}")
+    Good findById(Integer goodsId);
 }

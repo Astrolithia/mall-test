@@ -52,4 +52,9 @@ public class GoodServiceImpl implements GoodService {
         pb.setItems(goods);
         return pb;
     }
+
+    @Override
+    public Good findById(Integer goodsId) {
+        return goodMapper.findById(goodsId);
+    }
 }

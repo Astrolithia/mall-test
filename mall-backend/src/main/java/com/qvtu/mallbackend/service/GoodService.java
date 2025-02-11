@@ -7,4 +7,6 @@ public interface GoodService {
     void add(Good good);
 
     PageBean<Good> list(Integer pageNum, Integer pageSize, String title, Integer categoryId, String aliveStatus, String auditStatus);
+
+    Good findById(Integer goodsId);
 }

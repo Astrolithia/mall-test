@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qvtu.mallbackend.mapper.GoodMapper">
+
+    <!-- 分页查询商品列表 -->
+    <select id="list" resultType="com.qvtu.mallbackend.pojo.Good">
+        SELECT *
+        FROM `good`
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND (category_first_id = #{categoryId} OR category_second_id = #{categoryId} OR category_third_id =
+                #{categoryId})
+            </if>
+            <if test="aliveStatus != null and aliveStatus != ''">
+                AND alive_status = #{aliveStatus}
+            </if>
+            <if test="auditStatus != null and auditStatus != ''">
+                AND audit_status = #{auditStatus}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <!-- 查询商品总数 -->
+    <select id="count" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM `good`
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND (category_first_id = #{categoryId} OR category_second_id = #{categoryId} OR category_third_id =
+                #{categoryId})
+            </if>
+            <if test="aliveStatus != null and aliveStatus != ''">
+                AND alive_status = #{aliveStatus}
+            </if>
+            <if test="auditStatus != null and auditStatus != ''">
+                AND audit_status = #{auditStatus}
+            </if>
+        </where>
+    </select>
+</mapper>

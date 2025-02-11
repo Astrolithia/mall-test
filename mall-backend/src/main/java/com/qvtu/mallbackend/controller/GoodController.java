@@ -1,13 +1,11 @@
 package com.qvtu.mallbackend.controller;
 
 import com.qvtu.mallbackend.pojo.Good;
+import com.qvtu.mallbackend.pojo.PageBean;
 import com.qvtu.mallbackend.pojo.Result;
 import com.qvtu.mallbackend.service.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/good")
@@ -20,5 +18,17 @@ public class GoodController {
     public Result add(@RequestBody Good good) {
         goodService.add(good);
         return Result.success("商品添加成功");
+    }
+
+    @GetMapping("/list")
+    public Result<PageBean<Good>> listGoods(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Integer categoryId,
+            @RequestParam(required = false) String aliveStatus,
+            @RequestParam(required = false) String auditStatus) {
+        PageBean<Good> pb = goodService.list(pageNum, pageSize, title, categoryId, aliveStatus, auditStatus);
+        return Result.success(pb);
     }
 }

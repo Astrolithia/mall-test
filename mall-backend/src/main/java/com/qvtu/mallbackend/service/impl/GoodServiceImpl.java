@@ -2,11 +2,14 @@ package com.qvtu.mallbackend.service.impl;
 
 import com.qvtu.mallbackend.mapper.GoodMapper;
 import com.qvtu.mallbackend.pojo.Good;
+import com.qvtu.mallbackend.pojo.Merchant;
+import com.qvtu.mallbackend.pojo.PageBean;
 import com.qvtu.mallbackend.service.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class GoodServiceImpl implements GoodService {
@@ -30,5 +33,23 @@ public class GoodServiceImpl implements GoodService {
 
         // 调用Mapper保存商品
         goodMapper.add(good);
+    }
+
+    @Override
+    public PageBean<Good> list(Integer pageNum, Integer pageSize, String title, Integer categoryId, String aliveStatus, String auditStatus) {
+        // 计算分页偏移量
+        int offset = (pageNum - 1) * pageSize;
+
+        // 查询当前页数据
+        List<Good> goods = goodMapper.list(offset, pageSize, title, categoryId, aliveStatus, auditStatus);
+
+        // 查询总条数
+        Long total = goodMapper.count(title, categoryId, aliveStatus, auditStatus);
+
+        // 封装分页结果
+        PageBean<Good> pb = new PageBean<>();
+        pb.setTotal(total);
+        pb.setItems(goods);
+        return pb;
     }
 }

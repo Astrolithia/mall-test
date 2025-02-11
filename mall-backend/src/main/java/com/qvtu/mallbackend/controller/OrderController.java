@@ -38,4 +38,10 @@ public class OrderController {
         orderService.update(order);
         return Result.success("订单更新成功");
     }
+
+    @DeleteMapping("/delete")
+    public Result delete(@RequestParam Integer orderId) {
+        orderService.delete(orderId);
+        return Result.success("订单删除成功");
+    }
 }

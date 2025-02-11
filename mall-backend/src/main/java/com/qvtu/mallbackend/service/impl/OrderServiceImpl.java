@@ -59,5 +59,10 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.update(order);
     }
 
+    @Override
+    public void delete(Integer orderId) {
+        orderMapper.delete(orderId);
+    }
+
 
 }

@@ -5,6 +5,7 @@ import com.qvtu.mallbackend.pojo.PageBean;
 import com.qvtu.mallbackend.pojo.Result;
 import com.qvtu.mallbackend.service.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,5 +37,11 @@ public class GoodController {
     public Result<Good> detail(@RequestParam Integer goodsId) {
         Good g = goodService.findById(goodsId);
         return Result.success(g);
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody @Validated Good good) {
+        goodService.update(good);
+        return Result.success("商品信息更新成功");
     }
 }

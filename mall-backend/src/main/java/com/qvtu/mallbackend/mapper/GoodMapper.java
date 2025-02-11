@@ -32,4 +32,6 @@ public interface GoodMapper {
     // 根据Id查询商品详情
     @Select("SELECT * FROM Good WHERE goods_id=#{goodsId}")
     Good findById(Integer goodsId);
+
+    void update(Good good);
 }

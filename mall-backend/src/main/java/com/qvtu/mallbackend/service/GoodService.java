@@ -9,4 +9,6 @@ public interface GoodService {
     PageBean<Good> list(Integer pageNum, Integer pageSize, String title, Integer categoryId, String aliveStatus, String auditStatus);
 
     Good findById(Integer goodsId);
+
+    void update(Good good);
 }

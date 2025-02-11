@@ -45,4 +45,34 @@
             </if>
         </where>
     </select>
+
+    <!-- 更新商品信息 -->
+    <update id="update" parameterType="com.qvtu.mallbackend.pojo.Good">
+        UPDATE `good`
+        <set>
+            <if test="goodsSource != null">goods_source = #{goodsSource},</if>
+            <if test="merchantId != null">merchant_id = #{merchantId},</if>
+            <if test="oneselfStatus != null">oneself_status = #{oneselfStatus},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="subtitle != null">subtitle = #{subtitle},</if>
+            <if test="categoryFirstId != null">category_first_id = #{categoryFirstId},</if>
+            <if test="categorySecondId != null">category_second_id = #{categorySecondId},</if>
+            <if test="categoryThirdId != null">category_third_id = #{categoryThirdId},</if>
+            <if test="merchantCategoryId != null">merchant_category_id = #{merchantCategoryId},</if>
+            <if test="goodsTypeId != null">goods_type_id = #{goodsTypeId},</if>
+            <if test="aliveStatus != null">alive_status = #{aliveStatus},</if>
+            <if test="brandId != null">brand_id = #{brandId},</if>
+            <if test="goodsLabel != null">goods_label = #{goodsLabel},</if>
+            <if test="detailPc != null">detail_pc = #{detailPc},</if>
+            <if test="detailApp != null">detail_app = #{detailApp},</if>
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="refuseReason != null">refuse_reason = #{refuseReason},</if>
+            <if test="auditTime != null">audit_time = #{auditTime},</if>
+            update_time = NOW()
+        </set>
+        WHERE goods_id = #{goodsId}
+    </update>
 </mapper>

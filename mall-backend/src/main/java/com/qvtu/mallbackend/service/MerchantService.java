@@ -9,4 +9,6 @@ public interface MerchantService {
     PageBean<Merchant> list(Integer pageNum, Integer pageSize, String storeStatus, String merchantType);
 
     Merchant findById(Integer merchantId);
+
+    void update(Merchant merchant);
 }

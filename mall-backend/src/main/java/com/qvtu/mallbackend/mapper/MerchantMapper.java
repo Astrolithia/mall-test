@@ -1,10 +1,7 @@
 package com.qvtu.mallbackend.mapper;
 
 import com.qvtu.mallbackend.pojo.Merchant;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -28,6 +25,10 @@ public interface MerchantMapper {
     // 查询商家总数
     Long count(String storeStatus, String merchantType);
 
+    // 查询商家详情
     @Select("SELECT * FROM Merchant WHERE merchant_id=#{merchantId}")
     Merchant findById(Integer merchantId);
+
+    // 更新商家信息
+    void update(Merchant merchant);
 }

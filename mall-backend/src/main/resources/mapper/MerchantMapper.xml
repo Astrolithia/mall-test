@@ -31,4 +31,25 @@
         </where>
     </select>
 
+    <update id="update" parameterType="com.qvtu.mallbackend.pojo.Merchant">
+        UPDATE merchant
+        <set>
+            <if test="merchantName != null">merchant_name = #{merchantName},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="contactEmail != null">contact_email = #{contactEmail},</if>
+            <if test="storeName != null">store_name = #{storeName},</if>
+            <if test="storeStatus != null">store_status = #{storeStatus},</if>
+            <if test="merchantType != null">merchant_type = #{merchantType},</if>
+            <if test="registrationTime != null">registration_time = #{registrationTime},</if>
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="auditTime != null">audit_time = #{auditTime},</if>
+            <if test="refuseReason != null">refuse_reason = #{refuseReason},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            update_time = NOW()
+        </set>
+        WHERE merchant_id = #{merchantId}
+    </update>
 </mapper>

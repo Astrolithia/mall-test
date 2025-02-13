@@ -5,14 +5,16 @@ import {ElMessage} from 'element-plus'
 const loginForm = ref({
   username: '',
   password: '',
-  repassword: ''
+  repassword: '',
+  email: '',
+  phone: ''
 })
 
 // 校验密码的函数
 const checkRePassword = (rule, value, callback) => {
   if (value === '') {
     callback(new Error('请再次输入确认密码'))
-  } else if (value !== loginForm.password) {
+  } else if (value !== loginForm.value.password) {
     callback(new Error("请确保两次输入的密码一样"))
   } else {
     callback()
@@ -52,19 +54,40 @@ const rules = {
       validator: checkRePassword,
       trigger: 'blur'
     }
+  ],
+  email: [
+    {
+      required: true,
+      message: '请输入邮箱',
+      trigger: 'blur'
+    }
+
+  ],
+  phone: [
+    {
+      required: true,
+      message: '请输入电话',
+      trigger: 'blur'
+    }
   ]
 }
 
-const handleGoogleLogin = () => {
-  ElMessage.info('Google登录功能待实现')
+// 添加表单提交处理方法
+const handleSubmit = () => {
+  ElMessage.success('表单提交成功')
 }
 
-const handleEmailLogin = () => {
-  if (!loginForm.email) {
-    ElMessage.warning('请输入邮箱地址')
-    return
+// 调用后台接口，完成注册
+import {userRegisterService} from '@/api/user.js'
+
+const register = async () => {
+  let result = await userRegisterService(loginForm.value.username, loginForm.value.password);
+  if (result.code === 0) {
+    // 成功了
+    alert(result.msg ? result.msg : '注册成功')
+  } else {
+    alert("注册失败")
   }
-  ElMessage.success('登录请求已发送')
 }
 </script>
 
@@ -78,7 +101,7 @@ const handleEmailLogin = () => {
 
       <div class="login-form">
 
-        <el-form :model="loginForm" :rules="rules" @submit.prevent="handleEmailLogin">
+        <el-form :model="loginForm" :rules="rules" @submit.prevent="handleSubmit">
           <el-form-item prop="username">
             <el-input
                 v-model="loginForm.username"
@@ -90,6 +113,7 @@ const handleEmailLogin = () => {
             <el-input
                 v-model="loginForm.password"
                 placeholder="请输入密码"
+                type="password"
                 size="large"
             />
           </el-form-item>
@@ -97,6 +121,21 @@ const handleEmailLogin = () => {
             <el-input
                 v-model="loginForm.repassword"
                 placeholder="请再次输入密码"
+                type="password"
+                size="large"
+            />
+          </el-form-item>
+          <el-form-item prop="email">
+            <el-input
+                v-model="loginForm.email"
+                placeholder="请输入邮箱"
+                size="large"
+            />
+          </el-form-item>
+          <el-form-item prop="phone">
+            <el-input
+                v-model="loginForm.phone"
+                placeholder="请输入手机"
                 size="large"
             />
           </el-form-item>
@@ -104,9 +143,9 @@ const handleEmailLogin = () => {
               class="continue-btn"
               size="large"
               type="primary"
-              @click="handleEmailLogin"
+              @click="register"
           >
-            继续
+            注册
           </el-button>
         </el-form>
 

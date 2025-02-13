@@ -1,7 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import Dashboard from '@/views/Dashboard.vue';
 import LoginRegister from "@/views/LoginRegister.vue"; // 引入组件
-
+import LoginPage from '@/views/LoginPage.vue';
+import RegisterPage from '@/views/RegisterPage.vue';
 const routes = [
     {
         path: '/',
@@ -9,7 +10,11 @@ const routes = [
     }, // 配置路由
     {
         path: '/login',
-        component: LoginRegister
+        component: LoginPage
+    },
+    {
+        path: '/register',
+        component: RegisterPage
     }
 ];
 

@@ -26,6 +26,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(String username, String password, String email, String phone) {
+        // 添加日志
+        System.out.println("Registering user: " + username);
+        System.out.println("Password received: " + (password != null ? "not null" : "null"));
+        // 确保参数不为空
+        if (username == null || password == null) {
+            throw new IllegalArgumentException("Username and password cannot be null");
+        }
         // 需要对密码进行加密处理
         String md5String = Md5Util.getMD5String(password);
         // 添加

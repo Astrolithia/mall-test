@@ -81,12 +81,11 @@ const handleSubmit = () => {
 import {userRegisterService} from '@/api/user.js'
 
 const register = async () => {
-  let result = await userRegisterService(loginForm.value.username, loginForm.value.password);
+  let result = await userRegisterService(loginForm.value);
   if (result.code === 0) {
-    // 成功了
-    alert(result.msg ? result.msg : '注册成功')
+    alert(result.msg ? result.msg : '注册成功');
   } else {
-    alert("注册失败")
+    alert('注册失败');
   }
 }
 </script>

@@ -11,6 +11,20 @@ import java.util.Map;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 放行OPTIONS请求
+        if ("OPTIONS".equals(request.getMethod())) {
+            return true;
+        }
+        // 获取当前请求的路径
+        String requestURI = request.getRequestURI();
+        System.out.println("Interceptor - Request URI: " + requestURI); // 添加日志
+
+        // 如果是注册或登录接口,直接放行
+        if (requestURI.equals("/user/register") || requestURI.equals("/user/login")) {
+            System.out.println("Interceptor - Allowing access to " + requestURI); // 添加日志
+            return true;
+        }
+        
         // 令牌验证
         String token = request.getHeader("Authorization");
         // 验证token

@@ -36,12 +36,23 @@ const handleSubmit = () => {
 const goToRegister = () => {
   router.push('/register')
 }
+
 const login = async () => {
-  // 调用接口，完成登录
-  let result = await userLoginService(loginForm.value);
-  ElMessage.success(result.msg ? result.msg : '登录成功')
-  // 跳转到首页
-  router.push('/')
+  try {
+    const result = await userLoginService(loginForm.value)
+    if (result.code === 0) {
+      // 存储 token
+      localStorage.setItem('token', result.data.token)
+      ElMessage.success('登录成功')
+      // 跳转到首页
+      router.push('/')
+    } else {
+      ElMessage.error(result.message || '登录失败')
+    }
+  } catch (error) {
+    console.error('登录错误:', error)
+    ElMessage.error('登录失败')
+  }
 }
 </script>
 

@@ -4,8 +4,8 @@ import RegisterPage from '@/views/RegisterPage.vue';
 import LayoutVue from '@/views/Layout.vue';
 import ProfileAvatar from '@/components/ProfileAvatar.vue';
 import ProfileSettings from '@/components/ProfileSettings.vue';
-import OrderList from '@/components/OrderList.vue';
-import OrderHistory from '@/components/OrderHistory.vue';
+import OrderList from '@/components/order/OrderList.vue';
+import OrderHistory from '@/components/order/OrderHistory.vue';
 import DashboardContent from '@/components/DashboardContent.vue';
 const routes = [
     {
@@ -21,11 +21,11 @@ const routes = [
                 component: ProfileSettings
             },
             {
-                path: '/orders/list',
+                path: '/order/list',
                 component: OrderList
             },
             {
-                path: '/orders/history',
+                path: '/order/history',
                 component: OrderHistory
             },
             {

@@ -31,7 +31,7 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use(
-    config => {
+    (config) => {
         // 打印完整的请求信息
         console.log('Request Config:', {
             url: config.url,
@@ -42,7 +42,6 @@ request.interceptors.request.use(
         })
         return config
     },
-
     error => {
         console.error('Request Error:', error)
         return Promise.reject(error)
@@ -51,10 +50,6 @@ request.interceptors.request.use(
 
 // 响应拦截器
 request.interceptors.response.use(
-    // response => {
-    //     console.log('Response Success:', response.data)
-    //     return response.data
-    // },
     result => {
         // 判断业务状态码
         if (result.data.code === 0) {

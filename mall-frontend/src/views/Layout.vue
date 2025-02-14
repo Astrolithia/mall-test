@@ -20,7 +20,7 @@
             router
         >
           <!-- 仪表盘 -->
-          <el-menu-item index="/dashboard">
+          <el-menu-item index="/">
             <el-icon>
               <Odometer/>
             </el-icon>
@@ -50,20 +50,20 @@
           </el-sub-menu>
 
           <!-- 订单管理 -->
-          <el-sub-menu index="/orders">
+          <el-sub-menu index="/order">
             <template #title>
               <el-icon>
                 <Shop/>
               </el-icon>
               <span>订单管理</span>
             </template>
-            <el-menu-item index="/orders/list">
+            <el-menu-item index="/order/list">
               <el-icon>
                 <List/>
               </el-icon>
               <span>订单列表</span>
             </el-menu-item>
-            <el-menu-item index="/orders/history">
+            <el-menu-item index="/order/history">
               <el-icon>
                 <Timer/>
               </el-icon>

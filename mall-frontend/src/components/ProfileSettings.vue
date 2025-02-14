@@ -11,8 +11,4 @@ export default {
 </script>
 
 <style scoped>
-/* 样式 */
-.profile-settings {
-  padding: 20px;
-}
 </style>

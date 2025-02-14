@@ -1,3 +1,88 @@
+<!-- components/Dashboard.vue -->
+<template>
+  <div>
+    <div class="overview-header">
+      <h2>Overview</h2>
+      <span>Aug 13, 2023 - Aug 18, 2023</span>
+    </div>
+
+    <!-- 卡片统计区 -->
+    <el-row :gutter="20" class="stat-cards">
+      <el-col :span="8">
+        <el-card>
+          <h3>Your Balance</h3>
+          <div class="amount">$74,892</div>
+          <div class="change negative">+$1,340 -2.1%</div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <h3>Your Deposits</h3>
+          <div class="amount">$54,892</div>
+          <div class="change positive">+$1,340 +13.2%</div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <h3>Accrued Yield</h3>
+          <div class="amount">$20,892</div>
+          <div class="change positive">+$1,340 +1.2%</div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <!-- 图表区域 -->
+    <el-card class="chart-card">
+      <div class="chart-header">
+        <h3>General Statistics</h3>
+        <el-radio-group v-model="timeRange">
+          <el-radio-button label="today">Today</el-radio-button>
+          <el-radio-button label="week">Last week</el-radio-button>
+          <el-radio-button label="month">Last month</el-radio-button>
+          <el-radio-button label="6month">Last 6 month</el-radio-button>
+          <el-radio-button label="year">Year</el-radio-button>
+        </el-radio-group>
+      </div>
+      <div ref="chartRef" style="height: 300px"></div>
+    </el-card>
+
+    <!-- 资产列表 -->
+    <el-table :data="vaultData" style="margin-top: 20px">
+      <el-table-column label="Vault" width="200">
+        <template #default="scope">
+          <div class="vault-info">
+            <el-avatar :size="30" :src="scope.row.icon"/>
+            <div>
+              <div>{{ scope.row.name }}</div>
+              <div class="secondary-text">${{ scope.row.price }}</div>
+            </div>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="Daily" width="150">
+        <template #default="scope">
+          <span :class="scope.row.daily > 0 ? 'positive' : 'negative'">
+            +${{ scope.row.daily }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="balance" label="Balance" width="150"/>
+      <el-table-column prop="apy" label="APY" width="120"/>
+      <el-table-column prop="state" label="State" width="120">
+        <template #default="scope">
+          <el-tag>{{ scope.row.state }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="startDate" label="Start date" width="150"/>
+      <el-table-column label="Liquidity" width="150">
+        <template #default="scope">
+          <el-progress :percentage="scope.row.liquidity"/>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
 <script setup>
 import {ref, onMounted} from 'vue'
 import * as echarts from 'echarts'
@@ -5,7 +90,6 @@ import * as echarts from 'echarts'
 const timeRange = ref('week')
 const chartRef = ref(null)
 
-// 模拟数据
 const vaultData = ref([
   {
     name: 'Bitcoin',
@@ -69,92 +153,52 @@ onMounted(() => {
 })
 </script>
 
-<template>
-  <div>
-    <div class="overview-header">
-      <h2>Overview</h2>
-      <span>Aug 13, 2023 - Aug 18, 2023</span>
-    </div>
+<style scoped>
+.overview-header {
+  margin-bottom: 20px;
+}
 
-    <!-- 卡片统计区 -->
-    <el-row :gutter="20" class="stat-cards">
-      <el-col :span="8">
-        <el-card>
-          <h3>Your Balance</h3>
-          <div class="amount">$74,892</div>
-          <div class="change negative">
-            +$1,340 -2.1%
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card>
-          <h3>Your Deposits</h3>
-          <div class="amount">$54,892</div>
-          <div class="change positive">
-            +$1,340 +13.2%
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card>
-          <h3>Accrued Yield</h3>
-          <div class="amount">$20,892</div>
-          <div class="change positive">
-            +$1,340 +1.2%
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+.stat-cards .el-card {
+  margin-bottom: 20px;
+}
 
-    <!-- 图表区域 -->
-    <el-card class="chart-card">
-      <div class="chart-header">
-        <h3>General Statistics</h3>
-        <el-radio-group v-model="timeRange">
-          <el-radio-button label="today">Today</el-radio-button>
-          <el-radio-button label="week">Last week</el-radio-button>
-          <el-radio-button label="month">Last month</el-radio-button>
-          <el-radio-button label="6month">Last 6 month</el-radio-button>
-          <el-radio-button label="year">Year</el-radio-button>
-        </el-radio-group>
-      </div>
-      <div ref="chartRef" style="height: 300px"></div>
-    </el-card>
+.amount {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    <!-- 资产列表 -->
-    <el-table :data="vaultData" style="margin-top: 20px">
-      <el-table-column label="Vault" width="200">
-        <template #default="scope">
-          <div class="vault-info">
-            <el-avatar :size="30" :src="scope.row.icon"/>
-            <div>
-              <div>{{ scope.row.name }}</div>
-              <div class="secondary-text">${{ scope.row.price }}</div>
-            </div>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="Daily" width="150">
-        <template #default="scope">
-          <span :class="scope.row.daily > 0 ? 'positive' : 'negative'">
-            +${{ scope.row.daily }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="balance" label="Balance" width="150"/>
-      <el-table-column prop="apy" label="APY" width="120"/>
-      <el-table-column prop="state" label="State" width="120">
-        <template #default="scope">
-          <el-tag>{{ scope.row.state }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="startDate" label="Start date" width="150"/>
-      <el-table-column label="Liquidity" width="150">
-        <template #default="scope">
-          <el-progress :percentage="scope.row.liquidity"/>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
-</template>
+.change {
+  font-size: 14px;
+}
+
+.positive {
+  color: #67c23a;
+}
+
+.negative {
+  color: #f56c6c;
+}
+
+.chart-card {
+  margin-top: 20px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.vault-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.secondary-text {
+  color: #909399;
+  font-size: 12px;
+}
+</style>

@@ -18,42 +18,42 @@ const routes = [
     // {
     //     path: '/profile',
     //     name: 'Profile',
-    //     component: () => import('../views/profile/ProfileLayout.vue'),
+    //     component: () => import('../components/ProfileLayout.vue'),
     //     children: [
-    //         {
-    //             path: 'settings',
-    //             name: 'ProfileSettings',
-    //             component: () => import('../views/profile/ProfileSettings.vue')
-    //         },
-    //         {
-    //             path: 'avatar',
-    //             name: 'AvatarSettings',
-    //             component: () => import('../views/profile/AvatarSettings.vue')
-    //         }
+    //       {
+    //         path: 'settings',
+    //         name: 'ProfileSettings',
+    //         component: () => import('../components/ProfileSettings.vue')
+    //       },
+    //       {
+    //         path: 'avatar',
+    //         name: 'AvatarSettings',
+    //         component: () => import('../components/ProfileAvatar.vue')
+    //       }
     //     ]
     // },
     // {
     //     path: '/orders',
     //     name: 'Orders',
-    //     component: () => import('../views/orders/OrdersLayout.vue'),
+    //     component: () => import('../components/OrdersLayout.vue'),
     //     children: [
-    //         {
-    //             path: 'list',
-    //             name: 'OrderList',
-    //             component: () => import('../views/orders/OrderList.vue')
-    //         },
-    //         {
-    //             path: 'history',
-    //             name: 'OrderHistory',
-    //             component: () => import('../views/orders/OrderHistory.vue')
-    //         }
+    //       {
+    //         path: 'list',
+    //         name: 'OrderList',
+    //         component: () => import('../components/OrderList.vue')
+    //       },
+    //       {
+    //         path: 'history',
+    //         name: 'OrderHistory',
+    //         component: () => import('../components/OrderHistory.vue')
+    //       }
     //     ]
-    // },
-    // {
+    //   },
+    //   {
     //     path: '/settings',
     //     name: 'Settings',
-    //     component: () => import('../views/Settings.vue')
-    // }
+    //     component: () => import('../components/Settings.vue')
+    //   }
 ];
 
 const router = createRouter({

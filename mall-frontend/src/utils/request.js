@@ -42,6 +42,19 @@ request.interceptors.request.use(
         })
         return config
     },
+
+    error => {
+        console.error('Request Error:', error)
+        return Promise.reject(error)
+    }
+)
+
+// 响应拦截器
+request.interceptors.response.use(
+    // response => {
+    //     console.log('Response Success:', response.data)
+    //     return response.data
+    // },
     result => {
         // 判断业务状态码
         if (result.data.code === 0) {
@@ -51,18 +64,6 @@ request.interceptors.request.use(
         alert(result.data.msg ? result.data.msg : '服务异常')
         // 异步操作的状态转换为失败
         return Promise.reject(result.data)
-    },
-    error => {
-        console.error('Request Error:', error)
-        return Promise.reject(error)
-    }
-)
-
-// 响应拦截器
-request.interceptors.response.use(
-    response => {
-        console.log('Response Success:', response.data)
-        return response.data
     },
     error => {
         console.error('Response Error:', {

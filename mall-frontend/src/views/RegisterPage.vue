@@ -84,12 +84,14 @@ import {useRouter} from 'vue-router'
 const router = useRouter()
 const register = async () => {
   let result = await userRegisterService(loginForm.value);
-  if (result.code === 0) {
+//   if (result.code === 0) {
+//     alert(result.msg ? result.msg : '注册成功');
+//     router.push('/login')
+//   } else {
+//     alert('注册失败');
+//   }
     alert(result.msg ? result.msg : '注册成功');
     router.push('/login')
-  } else {
-    alert('注册失败');
-  }
 }
 const goToLogin = () => {
   router.push('/login')

@@ -27,7 +27,7 @@ const rules = {
   ]
 }
 
-import {userLoginService} from '@/api/user'
+import {userLoginService} from '@/api/user.js'
 
 const handleSubmit = () => {
   ElMessage.success('登录成功')
@@ -38,8 +38,8 @@ const goToRegister = () => {
 }
 const login = async () => {
   // 调用接口，完成登录
-  // let result = await userLoginService(loginForm);
-  alert('登录成功')
+  let result = await userLoginService(loginForm.value);
+  alert(result.msg ? result.msg : '登录成功')
 }
 </script>
 
@@ -72,7 +72,7 @@ const login = async () => {
               class="continue-btn"
               size="large"
               type="primary"
-              @click="handleSubmit"
+              @click="login"
           >
             登录
           </el-button>

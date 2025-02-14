@@ -22,7 +22,10 @@ public class OrderController {
     }
 
     @GetMapping("/list")
-    public Result<PageBean<Order>> list(Integer pageNum, Integer pageSize, String orderStatus) {
+    public Result<PageBean<Order>> listOrders(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false) String orderStatus) {
         PageBean<Order> pb = orderService.list(pageNum, pageSize, orderStatus);
         return Result.success(pb);
     }

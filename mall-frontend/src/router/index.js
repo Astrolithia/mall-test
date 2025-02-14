@@ -1,11 +1,38 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import Dashboard from '@/views/Dashboard.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
+import LayoutVue from '@/views/Layout.vue';
+import ProfileAvatar from '@/components/ProfileAvatar.vue';
+import ProfileSettings from '@/components/ProfileSettings.vue';
+import OrderList from '@/components/OrderList.vue';
+import OrderHistory from '@/components/OrderHistory.vue';
+import DashboardContent from '@/components/DashboardContent.vue';
 const routes = [
     {
         path: '/',
-        component: Dashboard,
+        component: LayoutVue,
+        children: [
+            {
+                path: '/profile/avatar',
+                component: ProfileAvatar
+            },
+            {
+                path: '/profile/setting',
+                component: ProfileSettings
+            },
+            {
+                path: '/orders/list',
+                component: OrderList
+            },
+            {
+                path: '/orders/history',
+                component: OrderHistory
+            },
+            {
+                path: '',
+                component: DashboardContent// 可以根据需要重定向到默认页面
+            }
+        ]
     }, // 配置路由
     {
         path: '/login',
@@ -14,51 +41,12 @@ const routes = [
     {
         path: '/register',
         component: RegisterPage
-    },
-    // {
-    //     path: '/profile',
-    //     name: 'Profile',
-    //     component: () => import('../components/ProfileLayout.vue'),
-    //     children: [
-    //       {
-    //         path: 'settings',
-    //         name: 'ProfileSettings',
-    //         component: () => import('../components/ProfileSettings.vue')
-    //       },
-    //       {
-    //         path: 'avatar',
-    //         name: 'AvatarSettings',
-    //         component: () => import('../components/ProfileAvatar.vue')
-    //       }
-    //     ]
-    // },
-    // {
-    //     path: '/orders',
-    //     name: 'Orders',
-    //     component: () => import('../components/OrdersLayout.vue'),
-    //     children: [
-    //       {
-    //         path: 'list',
-    //         name: 'OrderList',
-    //         component: () => import('../components/OrderList.vue')
-    //       },
-    //       {
-    //         path: 'history',
-    //         name: 'OrderHistory',
-    //         component: () => import('../components/OrderHistory.vue')
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     path: '/settings',
-    //     name: 'Settings',
-    //     component: () => import('../components/Settings.vue')
-    //   }
+    }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes: routes,
 });
 
 export default router;

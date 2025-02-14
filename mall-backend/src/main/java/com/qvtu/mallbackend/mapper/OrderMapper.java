@@ -12,8 +12,11 @@ public interface OrderMapper {
             "VALUES (#{userId}, #{merchantId}, #{orderStatus}, #{paymentStatus}, #{paymentTime}, #{orderTotal}, #{shippingStatus}, #{shippingTime})")
     void insertOrder(Order order);
 
-    // 查看订单列表
-    List<Order> list(@Param("userId") Integer userId, @Param("orderStatus") String orderStatus);
+    // 分页查询订单列表
+    List<Order> list(int offset, Integer pageSize, String orderStatus);
+
+    // 查询订单总数
+    Long count(String orderStatus);
 
     // 查询订单详情
     @Select("SELECT * FROM `Order` WHERE order_id=#{orderId}")

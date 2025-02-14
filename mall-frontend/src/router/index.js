@@ -15,45 +15,45 @@ const routes = [
         path: '/register',
         component: RegisterPage
     },
-    {
-        path: '/profile',
-        name: 'Profile',
-        component: () => import('../views/profile/ProfileLayout.vue'),
-        children: [
-            {
-                path: 'settings',
-                name: 'ProfileSettings',
-                component: () => import('../views/profile/ProfileSettings.vue')
-            },
-            {
-                path: 'avatar',
-                name: 'AvatarSettings',
-                component: () => import('../views/profile/AvatarSettings.vue')
-            }
-        ]
-    },
-    {
-        path: '/orders',
-        name: 'Orders',
-        component: () => import('../views/orders/OrdersLayout.vue'),
-        children: [
-            {
-                path: 'list',
-                name: 'OrderList',
-                component: () => import('../views/orders/OrderList.vue')
-            },
-            {
-                path: 'history',
-                name: 'OrderHistory',
-                component: () => import('../views/orders/OrderHistory.vue')
-            }
-        ]
-    },
-    {
-        path: '/settings',
-        name: 'Settings',
-        component: () => import('../views/Settings.vue')
-    }
+    // {
+    //     path: '/profile',
+    //     name: 'Profile',
+    //     component: () => import('../views/profile/ProfileLayout.vue'),
+    //     children: [
+    //         {
+    //             path: 'settings',
+    //             name: 'ProfileSettings',
+    //             component: () => import('../views/profile/ProfileSettings.vue')
+    //         },
+    //         {
+    //             path: 'avatar',
+    //             name: 'AvatarSettings',
+    //             component: () => import('../views/profile/AvatarSettings.vue')
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/orders',
+    //     name: 'Orders',
+    //     component: () => import('../views/orders/OrdersLayout.vue'),
+    //     children: [
+    //         {
+    //             path: 'list',
+    //             name: 'OrderList',
+    //             component: () => import('../views/orders/OrderList.vue')
+    //         },
+    //         {
+    //             path: 'history',
+    //             name: 'OrderHistory',
+    //             component: () => import('../views/orders/OrderHistory.vue')
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/settings',
+    //     name: 'Settings',
+    //     component: () => import('../views/Settings.vue')
+    // }
 ];
 
 const router = createRouter({

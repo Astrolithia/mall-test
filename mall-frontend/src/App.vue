@@ -1,12 +1,14 @@
+<script>
+import Dashboard from './views/Dashboard.vue';
+</script>
+
 <template>
   <router-view/>
+  <LayoutVue/>
+  <Dashboard/>
 </template>
 
-<script>
-export default {
-  name: 'App',
-};
-</script>
+
 
 <style>
 </style>

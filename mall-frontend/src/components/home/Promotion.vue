@@ -13,7 +13,7 @@ export default {
       promotions: [
         {
           id: 1,
-          image: 'https://img.alicdn.com/imgextra/i4/O1CN01Tk0HTo1zv7pxzgxXz_!!6000000006773-0-tps-846-472.jpg'
+          image: 'https://imgs.699pic.com/images/600/588/691.jpg!detail.v1'
         },
         {
           id: 2,

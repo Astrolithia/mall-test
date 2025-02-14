@@ -42,6 +42,16 @@ request.interceptors.request.use(
         })
         return config
     },
+    result => {
+        // 判断业务状态码
+        if (result.data.code === 0) {
+            return result.data;
+        }
+        // 操作失败
+        alert(result.data.msg ? result.data.msg : '服务异常')
+        // 异步操作的状态转换为失败
+        return Promise.reject(result.data)
+    },
     error => {
         console.error('Request Error:', error)
         return Promise.reject(error)

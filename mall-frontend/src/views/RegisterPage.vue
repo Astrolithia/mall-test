@@ -91,6 +91,9 @@ const register = async () => {
     alert('注册失败');
   }
 }
+const goToLogin = () => {
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -150,6 +153,11 @@ const register = async () => {
             注册
           </el-button>
         </el-form>
+
+        <p class="register-text">
+          已经有账号？
+          <el-link type="primary" @click="goToLogin">点击登录</el-link>
+        </p>
 
         <p class="terms-text">
           By signing up, you agree to the

@@ -39,7 +39,9 @@ const goToRegister = () => {
 const login = async () => {
   // 调用接口，完成登录
   let result = await userLoginService(loginForm.value);
-  alert(result.msg ? result.msg : '登录成功')
+  ElMessage.success(result.msg ? result.msg : '登录成功')
+  // 跳转到首页
+  router.push('/')
 }
 </script>
 

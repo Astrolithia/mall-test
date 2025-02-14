@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <!-- 顶部导航 -->
-    <el-header class="header">
+    <el-header class="header" v-if="!isLoginPage">
       <div class="logo">
         <h2>Vaultify</h2>
       </div>
@@ -11,7 +10,7 @@
       </el-select>
     </el-header>
 
-    <el-container>
+    <el-container v-if="!isLoginPage">
       <!-- 侧边栏 -->
       <el-aside width="250px">
         <el-menu
@@ -93,11 +92,15 @@
         <Settings v-if="activeMenu === 'settings'"/>
       </el-main>
     </el-container>
+
+    <!-- 登录页面 -->
+    <LoginPage v-if="isLoginPage"/>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
+import {useRoute} from 'vue-router'
 import {
   Odometer,
   User,
@@ -108,15 +111,19 @@ import {
   Timer,
   Setting
 } from '@element-plus/icons-vue'
-import DashboardContent from './components/DashboardContent.vue'
-import ProfileSettings from './components/ProfileSettings.vue'
-import ProfileAvatar from './components/ProfileAvatar.vue'
-import OrderList from './components/OrderList.vue'
-import OrderHistory from './components/OrderHistory.vue'
-import Settings from './components/Settings.vue'
+import DashboardContent from '@/components/DashboardContent.vue'
+import ProfileSettings from '@/components/ProfileSettings.vue'
+import ProfileAvatar from '@/components/ProfileAvatar.vue'
+import OrderList from '@/components/OrderList.vue'
+import OrderHistory from '@/components/OrderHistory.vue'
+import Settings from '@/components/Settings.vue'
+import LoginPage from '@/views/LoginPage.vue'
 
+const route = useRoute()
 const network = ref('eth')
 const activeMenu = ref('dashboard')
+
+const isLoginPage = computed(() => route.path === '/login')
 
 const handleMenuSelect = (index) => {
   activeMenu.value = index

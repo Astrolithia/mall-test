@@ -32,25 +32,13 @@ const orders = ref([
     "updateTime": "2025-02-10T15:22:01"
   }
 ])
+
 const orderList = async () => {
-  try {
-    const result = await orderListService()
-    if (result.code === 0) { // 假设 0 是成功状态码
-      orders.value = result.data.items
-    } else {
-      ElMessage.error(result.message || '获取订单列表失败')
-    }
-  } catch (error) {
-    if (error.response && error.response.status === 401) {
-      ElMessage.error('请先登录')
-      // 跳转到登录页
-      router.push('/login')
-    } else {
-      ElMessage.error('获取订单列表失败')
-    }
-  }
+  let result = await orderListService();
+  orders.value = result.data.items;
 }
 orderList()
+
 </script>
 
 <template>
@@ -63,7 +51,7 @@ orderList()
         </div>
       </div>
     </template>
-    <el-table :data="orderList" style="width: 100%">
+    <el-table :data="orders" style="width: 100%">
       <el-table-column label="序号" width="80" type="index"></el-table-column>
       <el-table-column label="订单编号" prop="orderId" width="100"></el-table-column>
       <el-table-column label="订单金额" width="120">

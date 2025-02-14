@@ -28,31 +28,24 @@ const rules = {
 }
 
 import {userLoginService} from '@/api/user.js'
+import {useTokenStore} from '@/store/token.js'
 
-const handleSubmit = () => {
-  ElMessage.success('登录成功')
-}
+const tokenStore = useTokenStore();
+
+// const handleSubmit = () => {
+//   ElMessage.success('登录成功')
+// }
 
 const goToRegister = () => {
   router.push('/register')
 }
 
 const login = async () => {
-  try {
-    const result = await userLoginService(loginForm.value)
-    if (result.code === 0) {
-      // 存储 token
-      localStorage.setItem('token', result.data.token)
-      ElMessage.success('登录成功')
-      // 跳转到首页
-      router.push('/')
-    } else {
-      ElMessage.error(result.message || '登录失败')
-    }
-  } catch (error) {
-    console.error('登录错误:', error)
-    ElMessage.error('登录失败')
-  }
+  let result = await userLoginService(loginForm.value);
+  ElMessage.success(result.msg ? result.msg : '登录成功');
+  // 把得到的token存储到pinia中
+  tokenStore.setToken(result.data);
+  router.push('/');
 }
 </script>
 
@@ -65,7 +58,7 @@ const login = async () => {
       </div>
 
       <div class="login-form">
-        <el-form :model="loginForm" :rules="rules" @submit.prevent="handleSubmit">
+        <el-form :model="loginForm" :rules="rules">
           <el-form-item prop="username">
             <el-input
                 v-model="loginForm.username"

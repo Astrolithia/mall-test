@@ -7,6 +7,7 @@ import ProfileSettings from '@/components/ProfileSettings.vue';
 import OrderList from '@/components/order/OrderList.vue';
 import OrderHistory from '@/components/order/OrderHistory.vue';
 import DashboardContent from '@/components/DashboardContent.vue';
+import ReturnRequest from '@/components/order/ReturnRequest.vue';
 const routes = [
     {
         path: '/',
@@ -31,6 +32,10 @@ const routes = [
             {
                 path: '',
                 component: DashboardContent// 可以根据需要重定向到默认页面
+            },
+            {
+                path: '/order/return',
+                component: ReturnRequest
             }
         ]
     }, // 配置路由

@@ -63,11 +63,17 @@
               </el-icon>
               <span>订单列表</span>
             </el-menu-item>
+            <el-menu-item index="/order/return">
+              <el-icon>
+                <List/>
+              </el-icon>
+              <span>退货申请处理</span>
+            </el-menu-item>
             <el-menu-item index="/order/history">
               <el-icon>
                 <Timer/>
               </el-icon>
-              <span>交易历史</span>
+              <span>退货原因设置</span>
             </el-menu-item>
           </el-sub-menu>
 
